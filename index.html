@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEAWISE CRUISE - Tarif Jasa Pelayaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c81;
+      --primary-dark: #0a355a;
+      --secondary: #13b5c8;
+      --accent: #f4b400;
+      --bg: #f4f8fb;
+      --text: #17324d;
+      --muted: #6b7a90;
+      --card: #ffffff;
+      --border: rgba(15, 76, 129, 0.12);
+      --shadow: 0 18px 50px rgba(15, 76, 129, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #eaf5fb 0%, #f4f8fb 35%, #ffffff 100%);
+      color: var(--text);
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.78);
+      border-bottom: 1px solid rgba(15,76,129,0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: var(--primary-dark);
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: var(--shadow);
+      font-size: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(15, 76, 129, 0.22);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .hero {
+      padding: 70px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.06;
+      margin: 0 0 16px;
+      color: var(--primary-dark);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.8));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    section {
+      padding: 22px 0 60px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card.featured {
+      border: 2px solid rgba(19,181,200,0.4);
+      transform: translateY(-4px);
+    }
+
+    .badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(19,181,200,0.12);
+      color: var(--secondary);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 8px 0;
+    }
+
+    .price-card ul {
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin: 18px 0 0;
+    }
+
+    .login-section {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .login-box, .panel-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .login-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .login-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .form-group input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s ease;
+      background: #fbfdff;
+    }
+
+    .form-group input:focus {
+      border-color: rgba(19,181,200,0.7);
+      box-shadow: 0 0 0 4px rgba(19,181,200,0.12);
+    }
+
+    .panel-box h3 {
+      margin-top: 0;
+      color: var(--primary-dark);
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #f8fcff, #fff);
+      border: 1px solid var(--border);
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+
+    footer {
+      padding: 22px 0 34px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .pricing-grid,
+      .login-section {
+        grid-template-columns: 1fr;
+      }
+      .stats,
+      .dashboard-cards {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">⚓</div>
+        <div>
+          <div>SEAWISE CRUISE</div>
+          <small style="font-weight:500;color:var(--muted);">Tarif Jasa Pelayaran Profesional</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#beranda">Beranda</a>
+        <a href="#tarif">Tarif</a>
+        <a href="#login">Admin Login</a>
+      </nav>
+      <a class="btn btn-primary" href="#login">Masuk Admin</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div>
+          <h1>Solusi Tarif Jasa Pelayaran yang Modern, Transparan, dan Andal.</h1>
+          <p>
+            SEAWISE CRUISE menghadirkan layanan pelayaran dengan tampilan profesional untuk
+            kebutuhan perusahaan, pengiriman barang, logistik laut, dan konsultasi tarif.
+            Website ini dirancang bersih, elegan, serta mudah dikembangkan ke sistem backend.
+          </p>
+          <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="#tarif">Lihat Tarif</a>
+            <a class="btn" style="background:#fff;border:1px solid var(--border);color:var(--primary-dark);" href="#login">Login Admin</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><strong>24/7</strong><span>Layanan</span></div>
+            <div class="stat"><strong>100%</strong><span>Responsif</span></div>
+            <div class="stat"><strong>5★</strong><span>Profesional</span></div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3 style="margin-top:0;color:var(--primary-dark);">Keunggulan Utama</h3>
+          <ul style="color:var(--muted);line-height:2; padding-left:18px;">
+            <li>Desain premium bertema laut.</li>
+            <li>Struktur harga mudah dibaca.</li>
+            <li>Cocok untuk landing page perusahaan pelayaran.</li>
+            <li>Siap dikembangkan ke dashboard admin.</li>
+          </ul>
+          <div style="margin-top:18px;padding:18px;border-radius:16px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;">
+            <strong>SEAWISE CRUISE</strong>
+            <div style="margin-top:6px;">Connecting your cargo with reliable sea transport.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tarif">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Tarif Jasa Pelayaran</h2>
+            <p>Contoh paket layanan yang bisa Anda ubah sesuai bisnis Anda.</p>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h3>Paket Reguler</h3>
+            <div class="price">Rp 2.500.000</div>
+            <small style="color:var(--muted);">per pengiriman</small>
+            <ul>
+              <li>Pengiriman antar pelabuhan domestik.</li>
+              <li>Estimasi waktu standar.</li>
+              <li>Tracking status dasar.</li>
+            </ul>
+          </div>
+
+          <div class="price-card featured">
+            <div class="badge">Populer</div>
+            <h3>Paket Bisnis</h3>
+            <div class="price">Rp 5.750.000</div>
+            <small style="color:var(--muted);">per pengiriman</small>
+            <ul>
+              <li>Prioritas loading dan unloading.</li>
+              <li>Monitoring kargo lebih detail.</li>
+              <li>Support customer service prioritas.</li>
+            </ul>
+          </div>
+
+          <div class="price-card">
+            <h3>Paket Premium</h3>
+            <div class="price">Rp 9.900.000</div>
+            <small style="color:var(--muted);">per pengiriman</small>
+            <ul>
+              <li>Layanan khusus volume besar.</li>
+              <li>Pengelolaan dokumen lengkap.</li>
+              <li>Penawaran kontrak jangka panjang.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="login">
+      <div class="container login-section">
+        <div class="login-box">
+          <div class="login-header">
+            <div class="login-icon">🔐</div>
+            <div>
+              <h2 style="margin:0;color:var(--primary-dark);">Login Admin</h2>
+              <p style="margin:4px 0 0;color:var(--muted);">Akses panel pengelolaan SEAWISE CRUISE</p>
+            </div>
+          </div>
+
+          <form onsubmit="return loginAdmin(event)">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" placeholder="Masukkan username admin" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Masukkan password" />
+            </div>
+            <button class="btn btn-primary" type="submit" style="width:100%;">Masuk</button>
+          </form>
+
+          <p id="loginMsg" style="margin-top:14px;color:var(--muted);"></p>
+        </div>
+
+        <div class="panel-box">
+          <h3>Dashboard Admin Preview</h3>
+          <p style="color:var(--muted);">
+            Setelah login, admin dapat memantau data tarif, pemesanan, pelanggan, dan laporan operasional.
+          </p>
+
+          <div class="dashboard-cards">
+            <div class="mini-card">
+              <span style="color:var(--muted);">Total Pesanan</span>
+              <strong>128</strong>
+            </div>
+            <div class="mini-card">
+              <span style="color:var(--muted);">Pelanggan Aktif</span>
+              <strong>54</strong>
+            </div>
+            <div class="mini-card">
+              <span style="color:var(--muted);">Rute Tersedia</span>
+              <strong>12</strong>
+            </div>
+            <div class="mini-card">
+              <span style="color:var(--muted);">Pendapatan</span>
+              <strong>Rp 87JT</strong>
+            </div>
+          </div>
+
+          <div style="margin-top:18px;padding:18px;border-left:4px solid var(--secondary);background:#f7fcfd;border-radius:12px;color:var(--muted);">
+            Tip: Anda bisa sambungkan form login ini ke backend PHP, Node.js, atau Firebase.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 SEAWISE CRUISE. Semua hak dilindungi.
+  </footer>
+
+  <script>
+    function loginAdmin(event) {
+      event.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const msg = document.getElementById('loginMsg');
+
+      if (user === 'admin' && pass === 'admin123') {
+        msg.style.color = '#0f8b57';
+        msg.textContent = 'Login berhasil. Selamat datang di dashboard admin SEAWISE CRUISE.';
+      } else {
+        msg.style.color = '#c0392b';
+        msg.textContent = 'Username atau password salah.';
+      }
+    }
+  </script>
+</body>
+</html>
